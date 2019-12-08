@@ -83,6 +83,7 @@ defmodule PhilomenaWeb.Router do
     end
     resources "/search", SearchController, only: [:index]
     resources "/oembed", OembedController, only: [:index]
+    resources "/tags", TagController, only: [:show]
   end
 
   scope "/", PhilomenaWeb do
@@ -105,6 +106,7 @@ defmodule PhilomenaWeb.Router do
       resources "/subscription", Image.SubscriptionController, only: [:create, :delete], singleton: true
       resources "/read", Image.ReadController, only: [:create], singleton: true
       resources "/comments", Image.CommentController, only: [:edit, :update]
+      resources "/delete", Image.DeleteController, only: [:create, :delete], singleton: true
     end
 
     resources "/forums", ForumController, only: [] do

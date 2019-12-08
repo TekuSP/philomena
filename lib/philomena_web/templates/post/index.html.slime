@@ -3,7 +3,7 @@ h1 Posts
 = form_for :posts, Routes.post_path(@conn, :index), [method: "get", class: "hform", enforce_utf8: false], fn f ->
   .field
     = text_input f, :pq, name: :pq, value: @conn.params["pq"], class: "input hform__text", placeholder: "Search posts", autocapitalize: "none"
-    = submit "Search", class: "hform__button button", data: [disable_with: false]
+    = submit "Search", class: "hform__button button"
 
   .fieldlabel
     ' For more information, see the
@@ -15,7 +15,7 @@ h2 Search Results
 = cond do
   - Enum.any?(@posts) ->
     - route = fn p -> Routes.post_path(@conn, :index, p) end
-    - pagination = render PhilomenaWeb.PaginationView, "_pagination.html", page: @posts, route: route, params: [cq: @conn.params["pq"]], conn: @conn
+    - pagination = render PhilomenaWeb.PaginationView, "_pagination.html", page: @posts, route: route, params: [pq: @conn.params["pq"]], conn: @conn
 
     = for {body, post} <- @posts, post.topic.hidden_from_users == false do
       = render PhilomenaWeb.PostView, "_post.html", body: body, post: post, conn: @conn
